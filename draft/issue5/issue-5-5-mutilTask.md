@@ -1,13 +1,4 @@
----
-layout: post
-title: "Multitasking in iOS 7"
-category: "5"
-date: "2013-10-07 07:00:00"
-tags: article
-author: "<a href=\"https://twitter.com/dcaunt\">David Caunt</a>"
-
-[参考链接](http://blog.jobbole.com/51660/)
-
+#iOS7的多任务
 ---
 
 在iOS7之前，当程序置于后台之后开发者们对他们程序所能做的事情非常有限。除了VOIP和基于地理位置特性以外，唯一能做的地方就是使用后台任务（background tasks）让代码可以执行几分钟。如果你想下载比较大的视频文件以便离线浏览，亦或者备份用户的照片到你的服务器上，你都仅能完成一部分工作。
@@ -307,6 +298,8 @@ iOS7中工作已经为你新添加的多任务处理和网络的API十分强大�
 - [WWDC 2013 session “What’s New in Foundation Networking”](https://developer.apple.com/wwdc/videos/?id=705)
 - [URL Loading System Programming Guide](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i)
 
+原文 [Multitasking in iOS 7](http://www.objc.io/issue-5/multitasking.html)
 
+参考译文 [iOS 7系列译文：iOS7的多任务处理 - 博客 - 伯乐在线](http://blog.jobbole.com/51660/)
 
 
