@@ -10,26 +10,15 @@ author: "<a href=\"https://twitter.com/dcaunt\">David Caunt</a>"
 
 ---
 
-
-Prior to iOS 7, developers were pretty limited in what they could do when their apps left the foreground. Aside from VOIP and location-based features, the only way to execute code in the background was to use background tasks, restricted to running for a few minutes. If you wanted to download a large video for offline viewing, or backup a user’s photos to your server, you could only complete part of the work.
-
 在iOS7之前，当程序置于后台之后开发者们对他们程序所能做的事情非常有限。除了VOIP和基于地理位置特性以外，唯一能做的地方就是使用后台任务（background tasks）让代码可以执行几分钟。如果你想下载比较大的视频文件以便离线浏览，亦或者备份用户的照片到你的服务器上，你都仅能完成一部分工作。
-
-iOS 7 adds two new APIs for updating your app’s UI and content in the background. The first, Background Fetch, allows you to fetch new content from the network at regular intervals. The second, Remote Notifications, is a new feature leveraging Push Notifications to notify an app when an event has occurred. Both of these new mechanisms help you to keep your app's interface up to date, and can schedule work on the new Background Transfer Service, which allows you to perform out-of-process network transfers (downloads and uploads).
 
 iOS 7添加了两个新的API以便你的程序可以在后台更新界面以及内容。首先是后台获取（Background Fetch），它允许你定期地从网络获取新的内容。第二个API就是远程通知（Remote Notifications），这是一个当事件发生时可以让推送通知主动提醒应用的新特性，这两者都为你的应用界面保持最新提供了极大的帮助。在新的后台传输服务（Background Transfer Service）中执行定期的任务，也允许你在进程之外可以执行网络传输（下载和上传）工作。
 
-Background Fetch and Remote Notifications are simple application delegate hooks with 30 seconds of wall-clock time to perform work before your app is suspended. They're not intended for CPU intensive work or long running tasks, rather, they are for queuing up long-running networking requests, like a large movie download, or performing quick content updates.
-
 后台获取（Background Fetch）和远程通知（Remote Notification）基于简单的应用程序委托钩子，在应用程序挂起之前的30秒时钟时间开始执行工作。它们不是用于CPU频繁工作或者长时间运行任务，而是用来处理长时间运行的网络请求队列，例如下载一部很大的电影，或者执行快速的内容更新。
-
-From a user’s perspective, the only obvious change to multitasking is the new app switcher, which displays a snapshot of each app’s UI as it was when it left the foreground. But there’s a reason for displaying the snapshots – you can now update your app’s snapshot after you complete background work, showing a preview of new content. Social networking, news, or weather apps can now display the latest content without the user having to open the app. We'll see how to update the snapshot later.
 
 对用户来说，多任务处理有一点显而易见的改变就是新的应用切换程序(the new app switcher)，它用来呈现应用到后台时的界面快照。这些快照的存在是有一定理由的--现在你可以在后台完成工作后更新程序快照，以用来呈现新的内容。社交网络、新闻或者天气等应用现在都可以直接呈现最新的内容而不需要用户重新打开应用。我们稍后会介绍如何更新屏幕快照。
 
 ## Background Fetch
- 
-Background Fetch is a kind of smart polling mechanism which works best for apps that have frequent content updates, like social networking, news, or weather apps. The system wakes up the app based on a user’s behavior, and aims to trigger background fetches in advance of the user launching the app. For example, if the user always uses an app at 1 p.m., the system learns and adapts, performing fetches ahead of usage periods. Background fetches are coalesced across apps by the device’s radio in order to reduce battery usage, and if you report that new data was not available during a fetch, iOS can adapt, using this information to avoid fetches at quiet times.
 
 后台获取（Background Fetch）是一种智能的轮询机制，它很适合需要经常更新内容的程序，像社交网络，新闻或天气的程序。为了在用户启动程序前提前触发后台获取，系统会根据用户行为唤醒应用程序。举个例子，如果用户经常在下午1点使用某个应用程序，系统会学习，适应并在使用周期前执行后台获取。为了减少电池使用，后台获取（Background Fetch）会跨应用程序被设备的无线电合并，如果你向系统报告新数据无法获取，iOS会适应并使用此信息避免会继续获取。
 
